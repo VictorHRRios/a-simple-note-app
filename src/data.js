@@ -1,3 +1,4 @@
+import { projectSelection } from "./dom";
 export let projects = []
 
 export class ToDoList {
@@ -20,13 +21,16 @@ export class Project {
 
     set title(value) {return this._title = value;}
 
-    addToDoList = (toDoList) => {
-        toDoLists.push(toDoList);
+
+    addToDoList  = (toDoList) => {
+        this.toDoLists.push(toDoList);
     }
 }
 
 
-const addNote = () => {
-    let newNote = new Project()
+export const addNote = (title, description, dueDate, priority) => {
+    const newNote = new ToDoList(title, description, dueDate, priority);
+    projects[projectSelection].addToDoList(newNote);
+    console.table(projects);
 }
 

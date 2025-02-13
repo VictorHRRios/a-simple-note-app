@@ -1,7 +1,7 @@
-import {projects, Project, ToDoList} from './data'
+import {projects, addNote, Project, ToDoList} from './data'
 
 
-let projectSelection = 0;
+export let projectSelection = 0;
 
 export const createButton = (onClickHandler) => {
     const button = document.createElement('button');
@@ -63,8 +63,7 @@ const confirmDialog = (event) => {
     const description =  formData.get('description');
     const dueDate =  formData.get('dueDate');
     const priority =  formData.get('priority');
-    const newToDoList = new ToDoList(title, description, dueDate, priority);
-    console.table(newToDoList);
+    addNote(title, description, dueDate, priority);
     event.target.reset()
     dialog.close()
 }
