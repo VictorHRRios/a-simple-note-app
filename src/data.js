@@ -8,6 +8,17 @@ export class ToDoList {
         this.dueDate = dueDate;
         this.priority = priority;
     }
+
+    get title() {return this._title;}
+    get description() {return this._description;}
+    get dueDate() {return this._dueDate;}
+    get priority() {return this._priority;}
+
+
+    set title(value) {return this._title = value;}
+    set description(value) {return this._description = value;}
+    set dueDate(value) {return this._dueDate = value;}
+    set priority(value) {return this._priority = value;}
 }
 
 export class Project {
@@ -25,6 +36,8 @@ export class Project {
     addToDoList  = (toDoList) => {
         this.toDoLists.push(toDoList);
     }
+
+    getList = () => this.toDoLists;
 }
 
 

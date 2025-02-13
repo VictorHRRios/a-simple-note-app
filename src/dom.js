@@ -23,6 +23,28 @@ export const updateNotes = (event) => {
 
     noteDisplay.appendChild(createNote);
     updateSidebar();
+    displayNotes();
+}
+
+const displayNotes = () => {
+    for (let element of projects[projectSelection].getList()) {
+        createNote(element);
+    }
+}
+
+const createNote = (note) => {
+    const noteDisplay = document.querySelector('div.notes');
+    const div = document.createElement('div');
+    const title = document.createElement('div');
+    const description = document.createElement('div');
+    const dueDate = document.createElement('div');
+    const priority = document.createElement('div');
+    title.textContent = note.title;
+    description.textContent = note.description;
+    dueDate.textContent = note.dueDate;
+    priority.textContent = note.priority;
+    div.append(title, description, dueDate, priority)
+    noteDisplay.appendChild(div);
 }
 
 export const updateSidebar = () => {
@@ -66,4 +88,5 @@ const confirmDialog = (event) => {
     addNote(title, description, dueDate, priority);
     event.target.reset()
     dialog.close()
+    displayNotes();
 }
