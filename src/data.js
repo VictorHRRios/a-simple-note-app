@@ -1,4 +1,3 @@
-
 export let projects = []
 
 export class ToDoList {
