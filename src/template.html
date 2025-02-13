@@ -11,12 +11,24 @@
     </header>
     <div class="main">
         <div class="side-navigation">
+            <button class="button-project">Create project</button>
+            <dialog class="create-project">
+                <form method="dialog" class="create-project">
+                    <div>
+                        <div>
+                            <label for="title">Title:</label>
+                        </div>
+                        <input type="text" id="title" name="title" placeholder="Some title" maxlength="20">
+                    <button class="cancel" autofocus>Cancel</button>
+                    <input type="submit" class="accept" value="accept">
+                    </div>
+                </form>
+            </dialog>
             <div class="project-container">
-
             </div>
         </div>
-        <dialog>
-            <form method="dialog">
+        <dialog class="create-note">
+            <form method="dialog" class="create-note">
                 <div>
                     <div>
                         <label for="title">Title:</label>

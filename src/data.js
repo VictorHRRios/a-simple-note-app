@@ -1,4 +1,4 @@
-import { projectSelection } from "./dom";
+import { projectSelection, updateSidebar } from "./dom";
 export let projects = []
 
 export class ToDoList {
@@ -45,5 +45,11 @@ export const addNote = (title, description, dueDate, priority) => {
     const newNote = new ToDoList(title, description, dueDate, priority);
     projects[projectSelection].addToDoList(newNote);
     console.table(projects);
+}
+
+export const addProject = (title) => {
+    const newProject = new Project(title);
+    projects.push(newProject);
+    updateSidebar();
 }
 

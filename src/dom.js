@@ -1,4 +1,4 @@
-import {projects, addNote, Project, ToDoList} from './data'
+import {projects, addNote, Project, ToDoList, addProject} from './data'
 
 
 export let projectSelection = 0;
@@ -13,7 +13,7 @@ export const createButton = (onClickHandler) => {
 export const updateNotes = (event) => {
     const clickedProjectId = parseInt(event.target.getAttribute('data-id'));
     const noteDisplay = document.querySelector('div.notes');
-    const createNote = createButton(showDialog);
+    const createNote = createButton(showDialogNote)
 
     noteDisplay.textContent = '';
     noteDisplay.style.backgroundColor = "#D4D2D5";
@@ -31,6 +31,8 @@ const displayNotes = () => {
         createNote(element);
     }
 }
+
+
 
 const createNote = (note) => {
     const noteDisplay = document.querySelector('div.notes');
@@ -61,15 +63,31 @@ export const updateSidebar = () => {
     currentlySelected.style.backgroundColor = "#3ABEFF";
 }
 
-const showDialog = () => {
-    const dialog = document.querySelector('dialog');
+
+const showDialogNote = () => {
+    const dialog = document.querySelector(`dialog.create-note`);
     dialog.showModal();
-    const acceptDialog = document.querySelector('form');
-    console.table(acceptDialog.elements)
-    acceptDialog.addEventListener('submit', confirmDialog);
+    const acceptDialog = document.querySelector(`form.create-note`);
+    //console.table(acceptDialog.elements)
+    acceptDialog.addEventListener('submit', confirmNote);
     const cancelDialog = document.querySelector('button.cancel');
     cancelDialog.addEventListener('click', closeDialog);
 }
+
+const showDialogProject = () => {
+    const dialog = document.querySelector(`dialog.create-project`);
+    dialog.showModal();
+    const acceptDialog = document.querySelector(`form.create-project`);
+    console.table(acceptDialog.elements)
+    acceptDialog.addEventListener('submit', confirmProject);
+    const cancelDialog = document.querySelector('button.cancel');
+    cancelDialog.addEventListener('click', closeDialog);
+}
+
+const createProject = (function() {
+    const createProjectButton = document.querySelector('.button-project');
+    createProjectButton.addEventListener('click', showDialogProject);
+})()
 
 const closeDialog = (event) => {
     const dialog = document.querySelector('dialog');
@@ -77,8 +95,8 @@ const closeDialog = (event) => {
     dialog.close()
 }
 
-const confirmDialog = (event) => {
-    const dialog = document.querySelector('dialog');
+const confirmNote = (event) => {
+    const dialog = document.querySelector('dialog.create-note');
     event.preventDefault();
     const formData = new FormData(event.target);
     const title = formData.get('title');
@@ -89,4 +107,15 @@ const confirmDialog = (event) => {
     event.target.reset()
     dialog.close()
     displayNotes();
+}
+
+const confirmProject = (event) => {
+    const dialog = document.querySelector('dialog.create-project');
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const title = formData.get('title');
+    addProject(title);
+    event.target.reset()
+    dialog.close()
+    updateSidebar();
 }
