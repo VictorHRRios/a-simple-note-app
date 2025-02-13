@@ -13,7 +13,7 @@ header {
 .main {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    height: 100vh;
+    height: 90vh;
 }
 
 .side-navigation {
@@ -21,14 +21,29 @@ header {
 }
 
 footer {
+    padding: 2rem;
     background-color: #546A76;
+    height: 10vh;
 }
 
 footer > h2 {
+    display: inline;
     padding: 1rem 1rem .2rem 1rem;
 }
 
 footer > div {
+    display: inline;
     padding: 0 1rem 1rem 3rem;
+}
+
+.project-container {
+    display: grid;
+    gap: 1rem;
+}
+
+button.project {
+    display: block;
+    height: 3rem;
+    border: 0;
 }
 
