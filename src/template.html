@@ -12,10 +12,39 @@
     <div class="main">
         <div class="side-navigation">
             <div class="project-container">
+
             </div>
         </div>
+        <dialog>
+            <form method="dialog">
+                <div>
+                    <div>
+                        <label for="title">Title:</label>
+                    </div>
+                    <input type="text" id="title" name="title" placeholder="Some title" maxlength="20">
+                    <div>
+                        <label for="description">Description:</label>
+                    </div>
+                    <input type="text" id="description" name="description" placeholder="A description" maxlength="50">
+                    <div>
+                        <label for="dueDate">Due date:</label>
+                    </div>
+                    <input type="date" id="dueDate" name="dueDate" placeholder="Date">
+                    <div>
+                        <label for="priority">Priority:</label>
+                    </div>
+                    <select id="priority" name="priority">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <button class="cancel" autofocus>Cancel</button>
+                <input type="submit" class="accept" value="accept">
+            </form>
+        </dialog>
         <div class="notes">
-
         </div>
     </div>
     <footer>
