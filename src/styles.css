@@ -58,6 +58,10 @@ footer > div {
     border: 0;
 }
 
+.new-note-button {
+    margin-bottom: 1rem;
+}
+
 .project {
     height: 3rem;
     border: 0;
@@ -72,5 +76,15 @@ footer > div {
 }
 
 .selected-project:hover {
+    background-color: #A0BDCF;
+}
+
+.note-summary {
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    padding-left: 1rem;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
     background-color: #A0BDCF;
 }

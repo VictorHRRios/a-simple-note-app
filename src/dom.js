@@ -27,25 +27,39 @@ export const displayNotes = () => {
     noteDisplay.appendChild(buttonNewNote);
     buttonNewNote.classList.add('new-note-button');
     for (let element of projects[projectSelection].getList()) {
-        createNote(element);
+        createNoteSummary(element);
     }
 }
 
 
 
-const createNote = (note) => {
+const createNoteSummary = (note) => {
     const noteDisplay = document.querySelector('div.notes');
-    const div = document.createElement('div');
+    const summary = document.createElement('div');
+    const detail = document.createElement('div');
     const title = document.createElement('div');
-    const description = document.createElement('div');
     const dueDate = document.createElement('div');
+    const description = document.createElement('div');
     const priority = document.createElement('div');
+    summary.classList.add('note-summary');
+    detail.classList.add('note-detail');
+    title.classList.add('title');
+    dueDate.classList.add('dueDate');
+    description.classList.add('description');
+    priority.classList.add('priority');
     title.textContent = note.title;
-    description.textContent = note.description;
     dueDate.textContent = note.dueDate;
+    description.textContent = "description: " + note.description;
     priority.textContent = note.priority;
-    div.append(title, description, dueDate, priority)
-    noteDisplay.appendChild(div);
+    summary.addEventListener('click', () =>{
+        if (detail.textContent.trim() !== '') {
+            detail.textContent = '';
+        } else {
+            detail.append(description, priority);
+        }
+    });
+    summary.append(title, dueDate, detail)
+    noteDisplay.appendChild(summary);
 }
 
 export const updateSidebar = () => {
@@ -67,7 +81,6 @@ const showDialogNote = () => {
     const dialog = document.querySelector(`dialog.create-note`);
     dialog.showModal();
     const acceptDialog = document.querySelector(`form.create-note`);
-    //console.table(acceptDialog.elements)
     acceptDialog.addEventListener('submit', confirmNote);
     const cancelDialog = document.querySelector('button.cancel');
     cancelDialog.addEventListener('click', closeDialog);
@@ -84,8 +97,13 @@ const confirmNote = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const title = formData.get('title');
-    const description =  formData.get('description');
-    const dueDate =  formData.get('dueDate');
+    const description =  formData.get('description') == '' ? 'No description' : formData.get('description');
+    if (formData.get('dueDate') == '') {
+        const date = new Date();
+        dueDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`
+    } else {
+        dueDate = formData.get('dueDate');
+    }
     const priority =  formData.get('priority');
     addNote(title, description, dueDate, priority);
     event.target.reset()
