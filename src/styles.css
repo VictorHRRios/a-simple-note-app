@@ -1,12 +1,13 @@
 body {
     height: 100vh;
     margin: 0;
-    background-color: #DBD3C9;
+    background-color: #133C55;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 header {
-    border-bottom: 3px solid #546A76;
+    color: #A0BDCF;
+    border-bottom: 3px solid #0C2332;
     padding: .5rem 1rem .5rem 2rem;
 }
 
@@ -17,12 +18,12 @@ header {
 }
 
 .side-navigation {
-    border-right: 3px solid #546A76;
+    border-right: 3px solid #0C2332;
 }
 
 footer {
     padding: 2rem;
-    background-color: #546A76;
+    background-color: #0C2332;
     height: 10vh;
 }
 
@@ -37,13 +38,39 @@ footer > div {
 }
 
 .project-container {
+    margin-top: 1rem;
     display: grid;
     gap: 1rem;
 }
 
-button.project {
+
+.button-project:hover, .new-note-button:hover {
+    background-color: #BFD7EA;
+}
+
+.new-note-button, .button-project {
+    font-size: 1rem;
+    font-weight: 700;
+    width: 100%;
+    height: 2rem;
+    background-color: white;
     display: block;
+    border: 0;
+}
+
+.project {
     height: 3rem;
     border: 0;
 }
 
+.project:hover {
+    background-color: #78A1BB;
+}
+
+.selected-project {
+    background-color: #78A1BB;
+}
+
+.selected-project:hover {
+    background-color: #A0BDCF;
+}
