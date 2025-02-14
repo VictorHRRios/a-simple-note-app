@@ -117,5 +117,4 @@ const confirmProject = (event) => {
     addProject(title);
     event.target.reset()
     dialog.close()
-    updateSidebar();
 }
