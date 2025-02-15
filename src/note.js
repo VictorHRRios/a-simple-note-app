@@ -12,8 +12,10 @@ export const displayNotes = () => {
     buttonNewNote.textContent = 'Create a new note'
     noteDisplay.appendChild(buttonNewNote);
     buttonNewNote.classList.add('new-note-button');
-    for (let element of projects[projectSelection].getList()) {
-        createNoteSummary(element);
+    if (projects[projectSelection] != undefined) {
+        for (let element of projects[projectSelection].getList()) {
+            createNoteSummary(element);
+        }
     }
 }
 

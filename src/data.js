@@ -44,7 +44,6 @@ export class Project {
 export const addNote = (title, description, dueDate, priority) => {
     const newNote = new ToDoList(title, description, dueDate, priority);
     projects[projectSelection].addToDoList(newNote);
-    console.table(projects);
 }
 
 export const addProject = (title) => {

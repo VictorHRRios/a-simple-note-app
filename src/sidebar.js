@@ -24,10 +24,13 @@ export const updateSidebar = () => {
         projectsContainer.appendChild(project);
     }
     const currentlySelected = document.querySelector(`[data-id="${projectSelection}"]`)
-    currentlySelected.classList.add('selected-project');
-    const deleteButton = document.createElement('img');
-    deleteButton.src = deleteImage;
-    currentlySelected.appendChild(deleteButton);
+    if (currentlySelected != null) {
+        currentlySelected.classList.add('selected-project');
+        const deleteButton = document.createElement('img');
+        deleteButton.src = deleteImage;
+        deleteButton.addEventListener('click', () => deleteProject(currentlySelected.getAttribute('data-id')));
+        currentlySelected.appendChild(deleteButton);
+    }
 }
 
 
@@ -41,6 +44,7 @@ export const confirmProject = (event) => {
     dialog.close()
 }
 
-const deleteProject = () => {
-
+const deleteProject = (id) => {
+    projects.splice(id, 1);
+    updateSidebar();
 } 

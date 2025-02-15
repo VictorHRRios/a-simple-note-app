@@ -20,7 +20,6 @@ export const showDialogProject = () => {
     const dialog = document.querySelector(`dialog.create-project`);
     dialog.showModal();
     const acceptDialog = document.querySelector(`form.create-project`);
-    console.table(acceptDialog.elements)
     acceptDialog.addEventListener('submit', confirmProject);
     const cancelDialog = document.querySelector('button.cancel');
     cancelDialog.addEventListener('click', closeDialog);
