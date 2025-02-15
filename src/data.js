@@ -1,4 +1,4 @@
-import { projectSelection, updateSidebar } from "./dom";
+import { projectSelection, updateSidebar } from "./sidebar";
 export let projects = []
 
 export class ToDoList {

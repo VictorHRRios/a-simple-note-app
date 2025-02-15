@@ -1,6 +1,8 @@
 import "./styles.css"
-import {updateSidebar, confirmProject, closeDialog, displayNotes} from './dom.js'
+import {showDialogProject} from './dom.js'
 import {projects, Project} from './data.js'
+import { updateSidebar } from "./sidebar.js";
+import { displayNotes } from "./note.js";
 
 const defaultSidebar = (function(){
     let newProject = new Project("A sample project");
@@ -9,17 +11,6 @@ const defaultSidebar = (function(){
     displayNotes();
 })();
 
-
-
-const showDialogProject = () => {
-    const dialog = document.querySelector(`dialog.create-project`);
-    dialog.showModal();
-    const acceptDialog = document.querySelector(`form.create-project`);
-    console.table(acceptDialog.elements)
-    acceptDialog.addEventListener('submit', confirmProject);
-    const cancelDialog = document.querySelector('button.cancel');
-    cancelDialog.addEventListener('click', closeDialog);
-}
 
 const createProject = (function() {
     const createProjectButton = document.querySelector('.button-project');

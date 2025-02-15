@@ -63,6 +63,10 @@ footer > div {
 }
 
 .project {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem 0 1rem;
+    background-color: #628397;
     height: 3rem;
     border: 0;
 }
@@ -72,11 +76,18 @@ footer > div {
 }
 
 .selected-project {
+    padding: 0 1rem 0 1rem;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
     background-color: #78A1BB;
 }
 
 .selected-project:hover {
     background-color: #A0BDCF;
+}
+.selected-project > img {
+    width: 2rem;
 }
 
 .note-summary {
