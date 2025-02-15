@@ -1,7 +1,10 @@
-import { createButton, showDialogNote } from "./dom";
+import { showDialogNote } from "./dom";
 import { addNote, projects } from "./data";
 import { projectSelection } from "./sidebar";
+import deleteImage from "./img/delete.svg";
+
 export const displayNotes = () => {
+    if (projects[projectSelection] == undefined) return;
     const noteDisplay = document.querySelector('div.notes');
     const buttonNewNote = document.createElement('button');
     buttonNewNote.addEventListener('click', function() {
@@ -12,22 +15,22 @@ export const displayNotes = () => {
     buttonNewNote.textContent = 'Create a new note'
     noteDisplay.appendChild(buttonNewNote);
     buttonNewNote.classList.add('new-note-button');
-    if (projects[projectSelection] != undefined) {
-        for (let element of projects[projectSelection].getList()) {
-            createNoteSummary(element);
-        }
+    for (let [index,element] of projects[projectSelection].getList().entries()) {
+        createNoteSummary(index, element);
     }
 }
 
-const createNoteSummary = (note) => {
+const createNoteSummary = (index, note) => {
     const noteDisplay = document.querySelector('div.notes');
     const summary = document.createElement('div');
     const detail = document.createElement('div');
     const title = document.createElement('div');
     const dueDate = document.createElement('div');
-    const description = document.createElement('div');
     const priority = document.createElement('div');
+    const description = document.createElement('div');
+    const deleteButton = document.createElement('img');
     summary.classList.add('note-summary');
+    summary.setAttribute('data-id', index);
     detail.classList.add('note-detail');
     title.classList.add('title');
     dueDate.classList.add('dueDate');
@@ -37,14 +40,20 @@ const createNoteSummary = (note) => {
     dueDate.textContent = note.dueDate;
     description.textContent = "description: " + note.description;
     priority.textContent = note.priority;
+    deleteButton.src = deleteImage;
+    deleteButton.addEventListener('click', () => {
+        projects[projectSelection].removeToDoList(index);
+        console.table(projects[projectSelection])
+        displayNotes();
+    })
     summary.addEventListener('click', () =>{
         if (detail.textContent.trim() !== '') {
             detail.textContent = '';
         } else {
-            detail.append(description, priority);
+            detail.append(description);
         }
     });
-    summary.append(title, dueDate, detail)
+    summary.append(priority, title, dueDate, deleteButton, detail)
     noteDisplay.appendChild(summary);
 }
 

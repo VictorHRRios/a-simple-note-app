@@ -8,7 +8,6 @@ const defaultSidebar = (function(){
     let newProject = new Project("A sample project");
     projects.push(newProject);
     updateSidebar();
-    displayNotes();
 })();
 
 

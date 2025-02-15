@@ -36,6 +36,10 @@ export class Project {
     addToDoList  = (toDoList) => {
         this.toDoLists.push(toDoList);
     }
+    
+    removeToDoList = (index) => {
+        this.toDoLists.splice(index, 1);
+    }
 
     getList = () => this.toDoLists;
 }
