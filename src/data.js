@@ -1,4 +1,4 @@
-import { projectSelection, updateSidebar } from "./sidebar";
+import { updateSidebar, projectSelection} from "./sidebar";
 export let projects = []
 
 export class ToDoList {
@@ -48,11 +48,47 @@ export class Project {
 export const addNote = (title, description, dueDate, priority) => {
     const newNote = new ToDoList(title, description, dueDate, priority);
     projects[projectSelection].addToDoList(newNote);
+    localStorage.setItem('project', JSON.stringify(projects));
+}
+
+export const removeNote = (index) => {
+    projects[projectSelection].removeToDoList(index);
+    localStorage.setItem('project', JSON.stringify(projects));
+    if (projects[projectSelection].getList().length == 0)
+        localStorage.removeItem(`project: ${projectSelection} notes`);
 }
 
 export const addProject = (title) => {
     const newProject = new Project(title);
     projects.push(newProject);
-    updateSidebar();
+    localStorage.setItem('project', JSON.stringify(projects));
 }
 
+
+export const deleteProject = (id) => {
+    projects.splice(id, 1);
+    localStorage.setItem('project', JSON.stringify(projects));
+    if (projects.length == 0) {
+        localStorage.removeItem('project');
+    }
+} 
+
+
+export const editProject = (element, id) => {
+    element.textContent = '';
+    const form = document.createElement('form');
+    const my_tb=document.createElement('INPUT');
+    const acceptButton = document.createElement('button');
+    acceptButton.textContent = "Accept";
+    my_tb.type='TEXT';
+    my_tb.name='myInput';
+    my_tb.value= projects[id].title;
+    acceptButton.addEventListener('click', ()=> {
+        projects[id].title = my_tb.value;
+        localStorage.setItem('project', JSON.stringify(projects));
+        updateSidebar();
+    })
+    form.appendChild(my_tb);
+    element.appendChild(form);
+    element.appendChild(acceptButton);
+}

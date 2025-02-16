@@ -1,6 +1,7 @@
 import { displayNotes } from "./note";
-import { addProject, projects } from "./data";
+import { addProject, editProject, deleteProject, projects } from "./data";
 import deleteImage from "./img/delete.svg";
+import editImage from "./img/pencil.svg";
 
 export let projectSelection = 0;
 
@@ -15,21 +16,33 @@ export const updateSidebar = () => {
     projectsContainer.textContent = '';
     for (let [index, item] of projects.entries()) {
         const project = document.createElement('div');
-        project.addEventListener('click', function() {
-            selectProject(this.getAttribute('data-id'));
+        const select = document.createElement('div');
+        select.addEventListener('click', function() {
+            selectProject(project.getAttribute('data-id'));
         })
         project.classList.add('project');
         project.setAttribute(`data-id`, index)
-        project.textContent = item.title;
+        select.textContent = item.title;
+        project.appendChild(select);
         projectsContainer.appendChild(project);
     }
     const currentlySelected = document.querySelector(`[data-id="${projectSelection}"]`)
     if (currentlySelected != null) {
         currentlySelected.classList.add('selected-project');
         const deleteButton = document.createElement('img');
+        const editButton = document.createElement('img');
         deleteButton.src = deleteImage;
-        deleteButton.addEventListener('click', () => deleteProject(currentlySelected.getAttribute('data-id')));
+        editButton.src = editImage;
+        deleteButton.addEventListener('click', () => {
+            deleteProject(currentlySelected.getAttribute('data-id'))
+            displayNotes();
+            updateSidebar();
+        });
+        editButton.addEventListener('click', () =>{ 
+            editProject(currentlySelected, currentlySelected.getAttribute('data-id'));
+        });
         currentlySelected.appendChild(deleteButton);
+        currentlySelected.appendChild(editButton);
     }
 }
 
@@ -42,9 +55,7 @@ export const confirmProject = (event) => {
     addProject(title);
     event.target.reset()
     dialog.close()
+    updateSidebar()
+    displayNotes();
 }
 
-const deleteProject = (id) => {
-    projects.splice(id, 1);
-    updateSidebar();
-} 

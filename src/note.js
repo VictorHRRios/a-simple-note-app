@@ -1,16 +1,17 @@
 import { showDialogNote } from "./dom";
-import { addNote, projects } from "./data";
+import { addNote, projects, removeNote } from "./data";
 import { projectSelection } from "./sidebar";
 import deleteImage from "./img/delete.svg";
 
 export const displayNotes = () => {
-    if (projects[projectSelection] == undefined) return;
     const noteDisplay = document.querySelector('div.notes');
+    noteDisplay.textContent = '';
+    noteDisplay.style.backgroundColor = "#133C55";
+    if (projects[projectSelection] == undefined) return;
     const buttonNewNote = document.createElement('button');
     buttonNewNote.addEventListener('click', function() {
         showDialogNote()
     })
-    noteDisplay.textContent = '';
     noteDisplay.style.backgroundColor = "#D4D2D5";
     buttonNewNote.textContent = 'Create a new note'
     noteDisplay.appendChild(buttonNewNote);
@@ -42,8 +43,7 @@ const createNoteSummary = (index, note) => {
     priority.textContent = note.priority;
     deleteButton.src = deleteImage;
     deleteButton.addEventListener('click', () => {
-        projects[projectSelection].removeToDoList(index);
-        console.table(projects[projectSelection])
+        removeNote(index);
         displayNotes();
     })
     summary.addEventListener('click', () =>{
@@ -67,7 +67,7 @@ export const confirmNote = (event) => {
     const dueDate = formData.get('dueDate') == '' ? 'No due date' : formData.get('dueDate');
     const priority =  formData.get('priority');
     addNote(title, description, dueDate, priority);
-    event.target.reset()
-    dialog.close()
+    event.target.reset();
+    dialog.close();
     displayNotes();
 }
